@@ -90,6 +90,7 @@ function sharded_tube.take(self, timeout, options)
 
     local frequency = 1000
     local wait_part = 0.01 -- maximum waiting time in second
+    local wait_max = options.wait_max or self.wait_max or time.MAX_TIMEOUT
 
     local calc_part = time.sec(take_timeout / frequency)
 
@@ -115,7 +116,11 @@ function sharded_tube.take(self, timeout, options)
         end
 
         fiber.sleep(wait_part)
+
         wait_part = wait_part * wait_factor
+        if wait_part > wait_max then
+            wait_part = wait_max
+        end
 
         local duration = time.cur() - begin
 
@@ -354,6 +359,7 @@ local function apply_config(cfg, opts)
             if sharded_queue.tube[tube_name] == nil then
                 local self = setmetatable({
                     tube_name = tube_name,
+                    wait_max = options.wait_max,
                     wait_factor = options.wait_factor or time.DEFAULT_WAIT_FACTOR,
                 }, {
                     __index = sharded_tube
