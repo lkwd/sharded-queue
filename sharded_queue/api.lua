@@ -108,7 +108,6 @@ function sharded_tube.take(self, timeout, options)
         wait_part = tonumber(calc_part)
     end
 
-    log.warn(wait_max)
     while take_timeout ~= 0 do
         local begin = time.cur()
 
