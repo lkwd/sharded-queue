@@ -2,7 +2,7 @@ package = 'sharded-queue'
 version = 'scm-1'
 source  = {
     url = 'git+https://github.com/lkwd/sharded-queue.git';
-    branch = 'master';
+    branch = 'release/v0.3';
 }
 dependencies = {
     'lua >= 5.1';
