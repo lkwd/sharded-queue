@@ -2,7 +2,7 @@ package = 'sharded-queue'
 version = 'scm-1'
 source  = {
     url = 'git+https://github.com/tarantool/sharded-queue.git';
-    branch = 'master';
+    branch = 'release/0.4';
 }
 dependencies = {
     'lua >= 5.1';
